@@ -1,0 +1,35 @@
+{
+  "name": "tsconfig-helper",
+  "version": "0.1.0",
+  "description": "Understand, compare, and generate tsconfig.json files. Plain English explanations.",
+  "main": "dist/index.js",
+  "bin": {
+    "tsconfig-helper": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc && cp src/options-db.json dist/options-db.json",
+    "dev": "tsc --watch",
+    "test": "node --test dist/test/**/*.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "typescript",
+    "tsconfig",
+    "cli",
+    "configuration",
+    "helper"
+  ],
+  "author": "muin-company",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muin-company/tsconfig-helper.git"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

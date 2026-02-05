@@ -1,0 +1,219 @@
+{
+  "compilerOptions": {
+    "target": {
+      "description": "Set the JavaScript language version for emitted JavaScript and include compatible library declarations.",
+      "type": "string",
+      "common": ["ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020", "ES2021", "ES2022", "ESNext"]
+    },
+    "module": {
+      "description": "Specify what module code is generated.",
+      "type": "string",
+      "common": ["commonjs", "esnext", "es2015", "es2020", "node16", "nodenext"]
+    },
+    "lib": {
+      "description": "Specify a set of bundled library declaration files that describe the target runtime environment.",
+      "type": "array",
+      "common": ["ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020", "ES2021", "ES2022", "ESNext", "DOM", "WebWorker"]
+    },
+    "jsx": {
+      "description": "Specify what JSX code is generated.",
+      "type": "string",
+      "common": ["preserve", "react", "react-jsx", "react-jsxdev", "react-native"]
+    },
+    "outDir": {
+      "description": "Specify an output folder for all emitted files.",
+      "type": "string"
+    },
+    "rootDir": {
+      "description": "Specify the root folder within your source files.",
+      "type": "string"
+    },
+    "strict": {
+      "description": "Enable all strict type-checking options. Recommended for all projects.",
+      "type": "boolean",
+      "default": false,
+      "recommended": true
+    },
+    "noImplicitAny": {
+      "description": "Enable error reporting for expressions and declarations with an implied 'any' type.",
+      "type": "boolean",
+      "default": false
+    },
+    "strictNullChecks": {
+      "description": "When type checking, take into account 'null' and 'undefined'.",
+      "type": "boolean",
+      "default": false
+    },
+    "strictFunctionTypes": {
+      "description": "When assigning functions, check to ensure parameters and the return values are subtype-compatible.",
+      "type": "boolean",
+      "default": false
+    },
+    "strictBindCallApply": {
+      "description": "Check that the arguments for 'bind', 'call', and 'apply' methods match the original function.",
+      "type": "boolean",
+      "default": false
+    },
+    "strictPropertyInitialization": {
+      "description": "Check for class properties that are declared but not set in the constructor.",
+      "type": "boolean",
+      "default": false
+    },
+    "noImplicitThis": {
+      "description": "Enable error reporting when 'this' is given the type 'any'.",
+      "type": "boolean",
+      "default": false
+    },
+    "alwaysStrict": {
+      "description": "Ensure 'use strict' is always emitted.",
+      "type": "boolean",
+      "default": false
+    },
+    "noUnusedLocals": {
+      "description": "Enable error reporting when local variables aren't read.",
+      "type": "boolean",
+      "default": false
+    },
+    "noUnusedParameters": {
+      "description": "Raise an error when a function parameter isn't read.",
+      "type": "boolean",
+      "default": false
+    },
+    "noImplicitReturns": {
+      "description": "Enable error reporting for codepaths that do not explicitly return in a function.",
+      "type": "boolean",
+      "default": false
+    },
+    "noFallthroughCasesInSwitch": {
+      "description": "Enable error reporting for fallthrough cases in switch statements.",
+      "type": "boolean",
+      "default": false
+    },
+    "esModuleInterop": {
+      "description": "Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility.",
+      "type": "boolean",
+      "default": false,
+      "recommended": true
+    },
+    "allowSyntheticDefaultImports": {
+      "description": "Allow 'import x from y' when a module doesn't have a default export.",
+      "type": "boolean",
+      "default": false
+    },
+    "skipLibCheck": {
+      "description": "Skip type checking all .d.ts files. Speeds up compilation significantly.",
+      "type": "boolean",
+      "default": false,
+      "recommended": true
+    },
+    "forceConsistentCasingInFileNames": {
+      "description": "Ensure that casing is correct in imports. Important for case-sensitive file systems.",
+      "type": "boolean",
+      "default": false,
+      "recommended": true
+    },
+    "resolveJsonModule": {
+      "description": "Enable importing .json files.",
+      "type": "boolean",
+      "default": false
+    },
+    "declaration": {
+      "description": "Generate .d.ts files from TypeScript and JavaScript files in your project.",
+      "type": "boolean",
+      "default": false
+    },
+    "declarationMap": {
+      "description": "Create sourcemaps for d.ts files.",
+      "type": "boolean",
+      "default": false
+    },
+    "sourceMap": {
+      "description": "Create source map files for emitted JavaScript files.",
+      "type": "boolean",
+      "default": false
+    },
+    "removeComments": {
+      "description": "Disable emitting comments in compiled output.",
+      "type": "boolean",
+      "default": false
+    },
+    "noEmit": {
+      "description": "Disable emitting files from a compilation. Useful for type-checking only.",
+      "type": "boolean",
+      "default": false
+    },
+    "importHelpers": {
+      "description": "Allow importing helper functions from tslib once per project, instead of including them per-file.",
+      "type": "boolean",
+      "default": false
+    },
+    "downlevelIteration": {
+      "description": "Emit more compliant, but verbose and less performant JavaScript for iteration.",
+      "type": "boolean",
+      "default": false
+    },
+    "isolatedModules": {
+      "description": "Ensure that each file can be safely transpiled without relying on other imports. Required for Babel, SWC, and Vite.",
+      "type": "boolean",
+      "default": false
+    },
+    "allowJs": {
+      "description": "Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files.",
+      "type": "boolean",
+      "default": false
+    },
+    "checkJs": {
+      "description": "Enable error reporting in type-checked JavaScript files.",
+      "type": "boolean",
+      "default": false
+    },
+    "moduleResolution": {
+      "description": "Specify how TypeScript looks up a file from a given module specifier.",
+      "type": "string",
+      "common": ["node", "node16", "nodenext", "bundler", "classic"]
+    },
+    "baseUrl": {
+      "description": "Specify the base directory to resolve non-relative module names.",
+      "type": "string"
+    },
+    "paths": {
+      "description": "Specify a set of entries that re-map imports to additional lookup locations.",
+      "type": "object"
+    },
+    "types": {
+      "description": "Specify type package names to be included without being referenced in a source file.",
+      "type": "array"
+    },
+    "allowImportingTsExtensions": {
+      "description": "Allow imports to include TypeScript file extensions (.ts, .tsx, .mts, .cts).",
+      "type": "boolean",
+      "default": false
+    },
+    "incremental": {
+      "description": "Save .tsbuildinfo files to allow for incremental compilation of projects.",
+      "type": "boolean",
+      "default": false
+    },
+    "composite": {
+      "description": "Enable constraints that allow a TypeScript project to be used with project references.",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "include": {
+    "description": "Specifies an array of filenames or patterns to include in the program.",
+    "type": "array"
+  },
+  "exclude": {
+    "description": "Specifies an array of filenames or patterns that should be skipped when resolving include.",
+    "type": "array"
+  },
+  "extends": {
+    "description": "Path to base configuration file to inherit from.",
+    "type": "string"
+  },
+  "files": {
+    "description": "Specifies an allowlist of files to include in the program.",
+    "type": "array"
+  }
+}
