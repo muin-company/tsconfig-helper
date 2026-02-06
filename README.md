@@ -182,6 +182,207 @@ OPTIONS:
 
 ---
 
+## 💡 Examples
+
+### Example 1: Understanding inherited config
+
+```bash
+$ tsconfig-helper explain
+
+📋 TSConfig Explanation: ./tsconfig.json
+
+════════════════════════════════════════════════════════════
+
+🔹 extends
+   Value: @tsconfig/react-native/tsconfig.json
+   Inherit options from a base configuration file
+
+🔹 compilerOptions.strict
+   Value: true
+   Enable all strict type-checking options. Includes:
+   - strictNullChecks
+   - strictFunctionTypes
+   - noImplicitAny
+   - and 5 more strict options
+
+🔹 compilerOptions.skipLibCheck
+   Value: true
+   Skip type checking of declaration files (.d.ts)
+   ⚠️  Faster builds, but may hide type errors in dependencies
+
+🔹 include
+   Value: ["src/**/*"]
+   Specifies files to include in compilation
+
+Total options: 12 explained
+```
+
+### Example 2: Starting a new Next.js project
+
+```bash
+$ tsconfig-helper init --type nextjs
+
+✅ Created nextjs tsconfig.json at: ./tsconfig.json
+
+📦 Recommended setup for nextjs projects:
+   - Strict mode: ✓ enabled
+   - Target: ES2020
+   - Module: esnext
+   - JSX: preserve (Next.js handles JSX)
+   - Path aliases: @/* → ./src/*
+
+💡 Run `tsconfig-helper explain` to understand each option!
+
+$ cat tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "plugins": [{ "name": "next" }]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
+```
+
+### Example 3: Debugging build vs. dev config differences
+
+```bash
+$ tsconfig-helper diff tsconfig.json tsconfig.build.json
+
+🔍 TSConfig Diff: tsconfig.json ↔️  tsconfig.build.json
+
+════════════════════════════════════════════════════════════
+
+➕ Added in tsconfig.build.json (3):
+   compilerOptions.removeComments: true
+   compilerOptions.sourceMap: false
+   compilerOptions.declaration: true
+
+➖ Removed from tsconfig.build.json (2):
+   compilerOptions.declarationMap: true
+   compilerOptions.incremental: true
+
+🔄 Changed (2):
+   compilerOptions.outDir:
+      tsconfig.json: ./dev-dist
+      tsconfig.build.json: ./dist
+
+   exclude:
+      tsconfig.json: ["node_modules", "**/*.test.ts"]
+      tsconfig.build.json: ["node_modules", "**/*.test.ts", "src/**/__mocks__"]
+
+════════════════════════════════════════════════════════════
+
+📊 Summary: 3 added, 2 removed, 2 changed, 18 same
+
+💡 Build config removes dev-only features:
+   - No incremental builds (clean builds for CI)
+   - No declaration maps (not needed for published package)
+   - Strips comments to reduce bundle size
+```
+
+### Example 4: Library publishing setup
+
+```bash
+$ cd my-awesome-lib
+$ tsconfig-helper init --type library
+
+✅ Created library tsconfig.json at: ./tsconfig.json
+
+$ tsconfig-helper explain --json > docs/tsconfig-explained.json
+
+$ cat tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts"]
+}
+
+# Perfect for npm publish:
+# - Generates .d.ts type definitions
+# - Source maps for debugging
+# - Excludes tests from build
+```
+
+### Example 5: Migrating from loose to strict mode
+
+```bash
+$ tsconfig-helper explain | grep strict
+
+🔹 compilerOptions.strict
+   Value: false
+   Enable all strict type-checking options. Recommended for all projects.
+
+# Enable strict mode
+$ cat tsconfig.json
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2020"
+  }
+}
+
+$ tsconfig-helper explain
+
+📋 TSConfig Explanation: ./tsconfig.json
+
+🔹 compilerOptions.strict
+   Value: true
+   Enable all strict type-checking options. Includes:
+   - noImplicitAny
+   - strictNullChecks
+   - strictFunctionTypes
+   - strictBindCallApply
+   - strictPropertyInitialization
+   - noImplicitThis
+   - alwaysStrict
+
+💡 This will catch many runtime errors at compile time!
+
+# Now compare before/after
+$ tsconfig-helper diff tsconfig.old.json tsconfig.json
+
+🔍 TSConfig Diff: tsconfig.old.json ↔️  tsconfig.json
+
+🔄 Changed (1):
+   compilerOptions.strict:
+      tsconfig.old.json: false
+      tsconfig.json: true
+
+💡 Enabling strict mode adds 7 type-checking rules.
+   Expect to see new TypeScript errors that were previously hidden!
+```
+
+---
+
 ## 🎨 Project Templates
 
 ### React (`--type react`)
