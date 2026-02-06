@@ -19,6 +19,7 @@ Zero dependencies. Fast. Opinionated (but configurable).
 ## 🎯 Features
 
 - **Plain English explanations** for 40+ TypeScript compiler options
+- **Config validation** — catch conflicts and anti-patterns automatically
 - **Project templates** optimized for React, Node.js, libraries, and Next.js
 - **Side-by-side diff** to compare configurations
 - **JSON output** for scripting and automation
@@ -87,7 +88,52 @@ tsconfig-helper explain --json
 
 ---
 
-### 2. Initialize a new tsconfig
+### 2. Validate your tsconfig
+
+Check for conflicts, anti-patterns, and best practices:
+
+```bash
+tsconfig-helper validate
+```
+
+**Example output:**
+```
+🔍 Validating ./tsconfig.json
+
+❌ Errors:
+
+  [compilerOptions] Cannot use both "sourceMap" and "inlineSourceMap"
+    💡 Remove one of these options
+
+  [compilerOptions.paths] "paths" requires "baseUrl" to be set
+    💡 Add "baseUrl": "./"
+
+⚠️  Warnings:
+
+  [compilerOptions.target] Target "ES3" is outdated (released 1999)
+    💡 Consider using at least "ES2015" or higher
+
+ℹ️  Suggestions:
+
+  [compilerOptions.strictNullChecks] Redundant when "strict": true is enabled
+    💡 Remove "strictNullChecks" from compilerOptions
+
+  [compilerOptions.skipLibCheck] Enabling skipLibCheck can significantly improve compilation speed
+    💡 Add "skipLibCheck": true unless you need to check library types
+
+📊 Summary: 2 error(s), 1 warning(s), 2 suggestion(s)
+```
+
+#### JSON output for CI/CD
+```bash
+tsconfig-helper validate --json
+```
+
+Returns exit code 1 if errors are found (warnings/suggestions don't fail).
+
+---
+
+### 3. Initialize a new tsconfig
 
 Generate a best-practice config for your project type:
 

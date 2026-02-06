@@ -3,6 +3,7 @@
 import { explainTSConfig } from './explain.js';
 import { initTSConfig } from './init.js';
 import { diffTSConfig } from './diff.js';
+import { validateTSConfig } from './validate.js';
 import { ProjectType } from './types.js';
 
 const args = process.argv.slice(2);
@@ -18,6 +19,9 @@ COMMANDS:
   explain [file]               Explain options in a tsconfig.json file
                                Default: ./tsconfig.json
 
+  validate [file]              Validate tsconfig for conflicts and best practices
+                               Default: ./tsconfig.json
+
   init --type <type> [output]  Generate a recommended tsconfig for your project type
                                Types: react, node, library, nextjs
                                Default output: ./tsconfig.json
@@ -25,11 +29,13 @@ COMMANDS:
   diff <file-a> <file-b>       Compare two tsconfig.json files
 
 OPTIONS:
-  --json                       Output in JSON format (for explain and diff)
+  --json                       Output in JSON format (for explain, validate, and diff)
   --help, -h                   Show this help message
 
 EXAMPLES:
   tsconfig-helper explain
+  tsconfig-helper validate
+  tsconfig-helper validate --json
   tsconfig-helper explain tsconfig.prod.json --json
   tsconfig-helper init --type react
   tsconfig-helper init --type node --output tsconfig.build.json
@@ -79,6 +85,12 @@ function main(): void {
       case 'explain': {
         const file = positional[0] || './tsconfig.json';
         explainTSConfig(file, !!options.json);
+        break;
+      }
+
+      case 'validate': {
+        const file = positional[0] || './tsconfig.json';
+        validateTSConfig(file, !!options.json);
         break;
       }
 
